@@ -20,6 +20,6 @@ func FetchUserEvent(username string) ([]Event, error) {
 	if err := json.NewDecoder(resp.Body).Decode(&events); err != nil {
 		return nil, err
 	}
-	fmt.Println(events)
+
 	return events, nil
 }

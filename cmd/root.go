@@ -3,6 +3,7 @@ package cmd
 import (
 	"fmt"
 	"github-activity/internal"
+	"github-activity/utils"
 	"os"
 
 	"github.com/spf13/cobra"
@@ -19,7 +20,13 @@ var rootCmd = &cobra.Command{
 		username := args[0]
 		// Call your function to fetch and display activity here
 		fmt.Println("Fetching activity for user:", username)
-		internal.FetchUserEvent(username)
+		events, err := internal.FetchUserEvent(username)
+		if err != nil {
+			fmt.Println("Error fetching user activity:", err)
+			return
+		}
+		// Display the fetched events in the terminal
+		utils.DisplayEvents(events)
 
 	},
 }
