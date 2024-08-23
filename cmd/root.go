@@ -9,6 +9,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "github-activity",
 	Short: "Fetch and display GitHub user activity",
@@ -18,8 +19,9 @@ var rootCmd = &cobra.Command{
 			os.Exit(1)
 		}
 		username := args[0]
-		// Call your function to fetch and display activity here
+
 		fmt.Println("Fetching activity for user:", username)
+		// Fetch the user's activity from GitHub
 		events, err := internal.FetchUserEvent(username)
 		if err != nil {
 			fmt.Println("Error fetching user activity:", err)
