@@ -13,6 +13,7 @@ import (
 var rootCmd = &cobra.Command{
 	Use:   "github-activity",
 	Short: "Fetch and display GitHub user activity",
+	// Args:  cobra.MaximumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		if len(args) < 1 {
 			fmt.Println("Please provide a GitHub username")
@@ -20,7 +21,6 @@ var rootCmd = &cobra.Command{
 		}
 		username := args[0]
 
-		fmt.Println("Fetching activity for user:", username)
 		// Fetch the user's activity from GitHub
 		events, err := internal.FetchUserEvent(username)
 		if err != nil {
