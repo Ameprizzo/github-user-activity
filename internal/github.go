@@ -18,6 +18,14 @@ func FetchUserEvent(username string) ([]Event, error) {
 	if err != nil {
 		return nil, err
 	}
+	if resp.StatusCode == 404 {
+		return nil, fmt.Errorf("user not found. please check the username")
+	}
+
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("error fetching data: %d", resp.StatusCode)
+	}
+
 	defer resp.Body.Close()
 
 	// Parse the JSON response into a slice of Event structs
